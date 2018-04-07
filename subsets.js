@@ -2,13 +2,9 @@ const findAllSubset = set => {
   if (set.length === 0) {
     return [[]];
   } else {
-    let ret = [];
-    for (let i = 0; i < set.length; i++) {
-      const d = set[i];
-      const rest = set.filter(dd => dd !== d);
-      const res = findAllSubset(rest);
-      return ret.concat(res.map(dd => dd.concat(d))).concat(res);
-    }
+    const [first, ...rest] = set;
+    const res = findAllSubset(rest);
+    return res.map(d => d.concat(first)).concat(res);
   }
 };
 
