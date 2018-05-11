@@ -24,37 +24,16 @@ const buildTree = arr => {
   return buildTreeFromArray(arr)(1);
 };
 
-const setParent = root => {
-  if (root.left) {
-    root.left.parent = root;
-    setParent(root.left);
-  }
-  if (root.right) {
-    root.right.parent = root;
-    setParent(root.right);
-  }
-};
-
-const isParent = (p, q) => {
-  // console.log(p.val, q.val);
-  if (p === q) {
-    return true;
-  } else if (!q.parent) {
-    return false;
-  } else {
-    return isParent(p, q.parent);
-  }
-};
-
 // we can improve performance by memorizing inTree
 var lowestCommonAncestor = function(root, p, q) {
-  setParent(root);
-  let commonParent = p;
-  while (commonParent && !isParent(commonParent, q)) {
-    commonParent = commonParent.parent;
+  if (root == null || root === p || root === q) {
+    return root;
   }
-
-  return commonParent;
+  const left = lowestCommonAncestor(root.left, p, q);
+  const right = lowestCommonAncestor(root.right, p, q);
+  if (left && right) return root;
+  if (!left && right) return right;
+  return left;
 };
 
 const tree1 = buildTree([3, 5, 1, 6, 2, 0, 8, null, null, 7, 4]);
