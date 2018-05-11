@@ -24,105 +24,69 @@ const buildTree = arr => {
   return buildTreeFromArray(arr)(1);
 };
 
-const inTree = (root, q) => {
-  if (!root) {
-    return false;
-  } else if (root === q) {
+const setParent = root => {
+  if (root.left) {
+    root.left.parent = root;
+    setParent(root.left);
+  }
+  if (root.right) {
+    root.right.parent = root;
+    setParent(root.right);
+  }
+};
+
+const isParent = (p, q) => {
+  // console.log(p.val, q.val);
+  if (p === q) {
     return true;
-  } else if (root) {
-    return inTree(root.left, q) || inTree(root.right, q);
+  } else if (!q.parent) {
+    return false;
+  } else {
+    return isParent(p, q.parent);
   }
 };
 
 // we can improve performance by memorizing inTree
 var lowestCommonAncestor = function(root, p, q) {
-  let pInLeftTree = inTree(root.left, p);
-  let qInLeftTree = inTree(root.left, q);
-  let pInRightTree = inTree(root.right, p);
-  let qInRightTree = inTree(root.right, q);
-  if (root === p || root === q) {
-    return root;
-  } else if (
-    (pInLeftTree && qInRightTree && !pInRightTree && !qInLeftTree) ||
-    (pInRightTree && qInLeftTree && !pInLeftTree && !qInRightTree)
-  ) {
-    return root;
-  } else if (pInLeftTree && qInLeftTree) {
-    return lowestCommonAncestor(root.left, p, q);
-  } else if (pInRightTree && qInRightTree) {
-    return lowestCommonAncestor(root.right, p, q);
+  setParent(root);
+  let commonParent = p;
+  while (commonParent && !isParent(commonParent, q)) {
+    commonParent = commonParent.parent;
   }
+
+  return commonParent;
 };
 
 const tree1 = buildTree([3, 5, 1, 6, 2, 0, 8, null, null, 7, 4]);
-console.log(tree1);
+
 console.log(lowestCommonAncestor(tree1, tree1.left, tree1.right).val); // 3
+
 console.log(
   lowestCommonAncestor(tree1, tree1.left, tree1.left.right.right).val
 ); // 5
 
-// console.log(
-//   lowestCommonAncestor(buildTree([1, 2]), new TreeNode(1), new TreeNode(2)).val
-// );
+const tree2 = buildTree([
+  37,
+  -34,
+  -48,
+  null,
+  -100,
+  -100,
+  48,
+  null,
+  null,
+  null,
+  null,
+  -54,
+  null,
+  -71,
+  -22,
+  null,
+  null,
+  null,
+  8
+]);
 
-// console.log(
-//   lowestCommonAncestor(
-//     buildTree([
-//       37,
-//       -34,
-//       -48,
-//       null,
-//       -100,
-//       -100,
-//       48,
-//       null,
-//       null,
-//       null,
-//       null,
-//       -54,
-//       null,
-//       -71,
-//       -22,
-//       null,
-//       null,
-//       null,
-//       8
-//     ]),
-//     new TreeNode(-100),
-//     new TreeNode(-71)
-//   ).val
-// );
-
-// console.log(
-//   lowestCommonAncestor(
-//     buildTree([
-//       37,
-//       -34,
-//       -48,
-//       null,
-//       -100,
-//       -100,
-//       48,
-//       null,
-//       null,
-//       null,
-//       null,
-//       -54,
-//       null,
-//       -71,
-//       -22,
-//       null,
-//       null,
-//       null,
-//       8
-//     ]),
-//     new TreeNode(-100),
-//     new TreeNode(-100)
-//   ).val
-// );
-
-// // the above algorithm cannot solve the following case
-// //          4
-// //      2      3
-// //    1     91    5
-// //  91  93      6   93
+console.log(
+  lowestCommonAncestor(tree2, tree2.left.right, tree2.right.left).val
+);
