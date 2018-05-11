@@ -27,7 +27,7 @@ const buildTree = arr => {
 const inTree = (root, q) => {
   if (!root) {
     return false;
-  } else if (root && root.val === q.val) {
+  } else if (root === q) {
     return true;
   } else if (root) {
     return inTree(root.left, q) || inTree(root.right, q);
@@ -40,12 +40,7 @@ var lowestCommonAncestor = function(root, p, q) {
   let qInLeftTree = inTree(root.left, q);
   let pInRightTree = inTree(root.right, p);
   let qInRightTree = inTree(root.right, q);
-  if (
-    p.val === q.val &&
-    ((pInLeftTree && qInRightTree) || (pInRightTree && qInLeftTree))
-  ) {
-    return root;
-  } else if (root.val === p.val || root.val === q.val) {
+  if (root === p || root === q) {
     return root;
   } else if (
     (pInLeftTree && qInRightTree && !pInRightTree && !qInLeftTree) ||
@@ -59,84 +54,75 @@ var lowestCommonAncestor = function(root, p, q) {
   }
 };
 
+const tree1 = buildTree([3, 5, 1, 6, 2, 0, 8, null, null, 7, 4]);
+console.log(tree1);
+console.log(lowestCommonAncestor(tree1, tree1.left, tree1.right).val); // 3
 console.log(
-  lowestCommonAncestor(
-    buildTree([3, 5, 1, 6, 2, 0, 8, null, null, 7, 4]),
-    new TreeNode(5),
-    new TreeNode(1)
-  ).val
-);
+  lowestCommonAncestor(tree1, tree1.left, tree1.left.right.right).val
+); // 5
 
-console.log(
-  lowestCommonAncestor(
-    buildTree([3, 5, 1, 6, 2, 0, 8, null, null, 7, 4]),
-    new TreeNode(5),
-    new TreeNode(4)
-  ).val
-);
+// console.log(
+//   lowestCommonAncestor(buildTree([1, 2]), new TreeNode(1), new TreeNode(2)).val
+// );
 
-console.log(
-  lowestCommonAncestor(buildTree([1, 2]), new TreeNode(1), new TreeNode(2)).val
-);
+// console.log(
+//   lowestCommonAncestor(
+//     buildTree([
+//       37,
+//       -34,
+//       -48,
+//       null,
+//       -100,
+//       -100,
+//       48,
+//       null,
+//       null,
+//       null,
+//       null,
+//       -54,
+//       null,
+//       -71,
+//       -22,
+//       null,
+//       null,
+//       null,
+//       8
+//     ]),
+//     new TreeNode(-100),
+//     new TreeNode(-71)
+//   ).val
+// );
 
-console.log(
-  lowestCommonAncestor(
-    buildTree([
-      37,
-      -34,
-      -48,
-      null,
-      -100,
-      -100,
-      48,
-      null,
-      null,
-      null,
-      null,
-      -54,
-      null,
-      -71,
-      -22,
-      null,
-      null,
-      null,
-      8
-    ]),
-    new TreeNode(-100),
-    new TreeNode(-71)
-  ).val
-);
+// console.log(
+//   lowestCommonAncestor(
+//     buildTree([
+//       37,
+//       -34,
+//       -48,
+//       null,
+//       -100,
+//       -100,
+//       48,
+//       null,
+//       null,
+//       null,
+//       null,
+//       -54,
+//       null,
+//       -71,
+//       -22,
+//       null,
+//       null,
+//       null,
+//       8
+//     ]),
+//     new TreeNode(-100),
+//     new TreeNode(-100)
+//   ).val
+// );
 
-console.log(
-  lowestCommonAncestor(
-    buildTree([
-      37,
-      -34,
-      -48,
-      null,
-      -100,
-      -100,
-      48,
-      null,
-      null,
-      null,
-      null,
-      -54,
-      null,
-      -71,
-      -22,
-      null,
-      null,
-      null,
-      8
-    ]),
-    new TreeNode(-100),
-    new TreeNode(-100)
-  ).val
-);
-
-// the above algorithm cannot solve the following case
-//          4
-//      2      3
-//    1     91    5
-//  91  93      6   93
+// // the above algorithm cannot solve the following case
+// //          4
+// //      2      3
+// //    1     91    5
+// //  91  93      6   93
