@@ -1,23 +1,36 @@
 // brute force
+// var containsNearbyDuplicate = function(nums, k) {
+//   if (k === 0) return false;
+
+//   const len = nums.length;
+
+//   for (let i = 1; i < k; i++) {
+//     if (nums[0] === nums[i]) return true;
+//   }
+
+//   for (let i = 0; i < len - k; i++) {
+//     for (let j = i + 1; j < i + k + 1; j++) {
+//       if (nums[i] === nums[j]) return true;
+//     }
+//   }
+
+//   for (let i = len - k; i < len - 1; i++) {
+//     if (nums[i] === nums[len - 1]) return true;
+//   }
+
+//   return false;
+// };
+
+// hash map
 var containsNearbyDuplicate = function(nums, k) {
-  if (k === 0) return false;
-
+  const hash = {};
   const len = nums.length;
-
-  for (let i = 1; i < k; i++) {
-    if (nums[0] === nums[i]) return true;
-  }
-
-  for (let i = 0; i < len - k; i++) {
-    for (let j = i + 1; j < i + k + 1; j++) {
-      if (nums[i] === nums[j]) return true;
+  for (let i = 0; i < len; i++) {
+    if (hash[nums[i]] != null && i - hash[nums[i]] <= k) {
+      return true;
     }
+    hash[nums[i]] = i;
   }
-
-  for (let i = len - k; i < len - 1; i++) {
-    if (nums[i] === nums[len - 1]) return true;
-  }
-
   return false;
 };
 
