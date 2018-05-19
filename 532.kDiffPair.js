@@ -5,31 +5,31 @@
  */
 
 // sorting is slow.
-var findPairs = function(nums, k) {
-  let c = 0;
-  nums.sort((a, b) => a - b);
-  const len = nums.length;
-  let prev = null;
+// var findPairs = function(nums, k) {
+//   let c = 0;
+//   nums.sort((a, b) => a - b);
+//   const len = nums.length;
+//   let prev = null;
 
-  // console.log(nums);
-  for (let i = 0; i < len; i++) {
-    if (nums[i] === prev) {
-      continue;
-    } else {
-      for (let j = i + 1; j < len; j++) {
-        if (nums[i] + k === nums[j]) {
-          // console.log(i, j);
-          c++;
-          break;
-        } else if (nums[i] + k < nums[j]) {
-          break;
-        }
-      }
-    }
-    prev = nums[i];
-  }
-  return c;
-};
+//   // console.log(nums);
+//   for (let i = 0; i < len; i++) {
+//     if (nums[i] === prev) {
+//       continue;
+//     } else {
+//       for (let j = i + 1; j < len; j++) {
+//         if (nums[i] + k === nums[j]) {
+//           // console.log(i, j);
+//           c++;
+//           break;
+//         } else if (nums[i] + k < nums[j]) {
+//           break;
+//         }
+//       }
+//     }
+//     prev = nums[i];
+//   }
+//   return c;
+// };
 
 //using hash map
 var findPairs = function(nums, k) {

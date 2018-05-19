@@ -6,7 +6,6 @@
 var findPoisonedDuration = function(timeSeries, duration) {
   const len = timeSeries.length;
   let ret = 0;
-  //TODO
   for (let i = 0; i < len - 1; i++) {
     if (timeSeries[i + 1] - timeSeries[i] < duration) {
       ret += timeSeries[i + 1] - timeSeries[i];
