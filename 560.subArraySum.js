@@ -9,35 +9,52 @@
 // space = O(n)
 // it is too slow.
 
+// var subarraySum = function(nums, k) {
+//   const n = nums.length;
+
+//   if (n === 0) return 0;
+//   if (n === 1) return nums[0] === k ? 1 : 0;
+
+//   let table = Array(n).fill(0);
+
+//   let count = 0;
+
+//   table[0] = nums[0];
+//   if (table[0] === k) count++;
+
+//   for (let i = 1; i < n; i++) {
+//     table[i] = nums[i] + table[i - 1];
+//     if (table[i] === k) count++;
+//   }
+//   // console.log('init', table, count);
+
+//   for (let i = 1; i < n; i++) {
+//     for (let j = i; j < n; j++) {
+//       table[j] = table[j] - nums[i - 1];
+//       if (table[j] === k) {
+//         count++;
+//       }
+//     }
+//     // console.log(table);
+//   }
+
+//   return count;
+// };
+
+// best sol from website
 var subarraySum = function(nums, k) {
-  const n = nums.length;
-
-  if (n === 0) return 0;
-  if (n === 1) return nums[0] === k ? 1 : 0;
-
-  let table = Array(n).fill(0);
-
+  const map = new Map();
+  let sum = 0;
   let count = 0;
-
-  table[0] = nums[0];
-  if (table[0] === k) count++;
-
-  for (let i = 1; i < n; i++) {
-    table[i] = nums[i] + table[i - 1];
-    if (table[i] === k) count++;
-  }
-  // console.log('init', table, count);
-
-  for (let i = 1; i < n; i++) {
-    for (let j = i; j < n; j++) {
-      table[j] = table[j] - nums[i - 1];
-      if (table[j] === k) {
-        count++;
-      }
+  map.set(0, 1);
+  nums.forEach(num => {
+    sum += num;
+    if (map.get(sum - k)) {
+      count += map.get(sum - k);
     }
-    // console.log(table);
-  }
-
+    const t = map.get(sum);
+    map.set(sum, t ? t + 1 : 1);
+  });
   return count;
 };
 
