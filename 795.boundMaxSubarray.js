@@ -98,37 +98,51 @@ var numSubarrayBoundedMaxResult = function(A, L, R) {
 // console.log(numSubarrayBoundedMaxResult([2, 9, 2, 5, 6], 2, 8)); // 7
 // // // [2] [2] [2, 5] [2, 5, 6] [5] [5, 6] [6]
 
-const stepCount = (A, L) => {
-  const len = A.length;
-  let ret = 0;
-  for (let i = 0; i < len; i++) {
-    for (let j = i; j < len; j++) {
-      if (A[j] >= L) {
-        ret += len - j;
-        break;
-      }
-    }
-  }
-  return ret;
-};
+// my solution from above
+// const stepCount = (A, L) => {
+//   const len = A.length;
+//   let ret = 0;
+//   for (let i = 0; i < len; i++) {
+//     for (let j = i; j < len; j++) {
+//       if (A[j] >= L) {
+//         ret += len - j;
+//         break;
+//       }
+//     }
+//   }
+//   return ret;
+// };
 
+// var numSubarrayBoundedMax = function(A, L, R) {
+//   const len = A.length;
+
+//   if (len === 0) return 0;
+
+//   let ret = 0;
+//   let last = 0;
+//   for (let i = 0; i < len; i++) {
+//     if (A[i] > R) {
+//       const left = A.slice(last, i);
+//       ret += stepCount(left, L);
+//       last = i + 1;
+//     }
+//   }
+//   const right = A.slice(last, len);
+//   ret += stepCount(right, L);
+//   return ret;
+// };
+
+// best solution from web
 var numSubarrayBoundedMax = function(A, L, R) {
-  const len = A.length;
-
-  if (len === 0) return 0;
-
-  let ret = 0;
-  let last = 0;
-  for (let i = 0; i < len; i++) {
-    if (A[i] > R) {
-      const left = A.slice(last, i);
-      ret += stepCount(left, L);
-      last = i + 1;
-    }
+  var result = 0;
+  var left = -1;
+  var right = -1;
+  for (let i = 0; i < A.length; i++) {
+    if (A[i] > R) left = i;
+    if (A[i] >= L) right = i;
+    result += right - left;
   }
-  const right = A.slice(last, len);
-  ret += stepCount(right, L);
-  return ret;
+  return result;
 };
 
 console.log(numSubarrayBoundedMax([1, 2, 3, 4], 1, 4)); // 10
