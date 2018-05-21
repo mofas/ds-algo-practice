@@ -5,7 +5,7 @@
 
 // should be able to use divide and conquer
 var findMin = function(nums) {
-  console.log(nums);
+  // console.log(nums);
   const len = nums.length;
   if (len === 1) return nums[0];
   if (len === 2) return nums[0] > nums[1] ? nums[1] : nums[0];
