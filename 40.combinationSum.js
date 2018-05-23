@@ -27,6 +27,8 @@ var combinationSum2 = function(candidates, target) {
 };
 
 // best sol
+// it use the same tech as 90.subsets2 to remove duplicate
+
 // var combinationSum2 = function(candidates, target) {
 //   let ans = []
 //   candidates.sort((a,b) => a - b)
