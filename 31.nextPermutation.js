@@ -3,7 +3,8 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 
-// first version, slow
+// first version, don't understand why it is slow
+// I guess it slow because of sort.push
 var nextPermutation = function(nums) {
   const n = nums.length;
 
@@ -38,32 +39,39 @@ var nextPermutation = function(nums) {
 
 // concise and good sol from web
 // var nextPermutation = function(nums) {
-//   for (let i = nums.length - 1, j = nums.length - 2; j >= 0; i--, j--) {
-//     if (nums[j] < nums[i]) {
-//       for (let k = i; k < nums.length; k++) {
-//         if (nums[k] > nums[j] && nums[k] <= nums[i]) {
-//           i = k;
-//         }
+//   var point, st= [], tobeSwapped, swap, temp, sub;
+//   for(var i=nums.length-1; i>=1; i--) {
+//       if(nums[i] > nums[i-1]) {
+//           point = i-1;
+//           break;
 //       }
-//       swap(nums, i, j);
-//       reverseAt(nums, j + 1);
+//   }
+//   if(point === undefined) {
+//       nums.sort((a, b) => a-b);
 //       return;
-//     }
 //   }
 
-//   nums.reverse();
-// };
-
-// var swap = function(nums, i, j) {
-//   let val = nums[i];
-//   nums[i] = nums[j];
-//   nums[j] = val;
-// };
-
-// var reverseAt = function(nums, start) {
-//   for (let i = start, j = nums.length - 1; i < j; i++, j--) {
-//     swap(nums, i, j);
+//   swap = nums[point];
+//   for(var i=nums.length-1; i>=0; i--) {
+//       if(nums[i] > swap && !tobeSwapped) {
+//           tobeSwapped = i;
+//           break;
+//       }
 //   }
+//   temp = nums[point];
+//   nums[point] = nums[tobeSwapped];
+//   nums[tobeSwapped] = temp;
+
+//   sub = nums.slice(point+1, nums.length).sort((a, b) => a-b);
+//   var i= nums.length-1;
+//   while(i > point) {
+//       nums.pop();
+//       i--;
+//   }
+//   while(sub.length > 0) {
+//       nums.push(sub.shift());
+//   }
+//   return;
 // };
 
 nextPermutation([1, 2, 3]); //[1,3,2]
