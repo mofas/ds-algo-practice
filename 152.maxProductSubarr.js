@@ -60,6 +60,7 @@ var maxProduct = function(nums) {
 };
 
 // best sol from web
+// so elegant!!
 // var maxProduct = function(nums) {
 //   var max = nums[0];
 //   var min = nums[0];
