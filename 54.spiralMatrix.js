@@ -46,6 +46,38 @@ var spiralOrder = function(matrix) {
   return ret;
 };
 
+// best sol from web
+// var spiralOrder = function(matrix) {
+//   if (matrix.length === 0)
+//   return [];
+//   var height = matrix.length, width = matrix[0].length;
+//   var left = 0, up = 0, right = width - 1, down = height - 1;
+//   var result = [];
+//   while (true) {
+//     // up-left to up-right
+//     for (var i = left; i <= right; i++)
+//       result.push(matrix[up][i]);
+//     if (++up > down)
+//       break;
+//     // upper-right to down-right
+//     for (var i = up; i <= down; i++)
+//       result.push(matrix[i][right]);
+//     if (--right < left)
+//       break;
+//     // down-right to down-left
+//     for (var i = right; i >= left; i--)
+//       result.push(matrix[down][i]);
+//     if (--down < up)
+//       break;
+//     // down-left to up left
+//     for (var i = down; i >= up; i--)
+//       result.push(matrix[i][left]);
+//     if (++left > right)
+//       break;
+//    }
+//    return result;
+// };
+
 console.log(spiralOrder([[1]]));
 // [1]
 
