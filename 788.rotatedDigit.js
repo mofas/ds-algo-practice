@@ -133,11 +133,15 @@ var rotatedDigits = function(N) {
     const e = exclude ? excludeNumCount[index] * base3 : 0;
     ret += c - e;
     if (!isValid[cs[i]]) break;
-    exclude = exclude & isExclude[cs[i]];
+    exclude = exclude && isExclude[cs[i]];
   }
 
   return ret;
 };
+
+console.log(rotatedDigits(67)); // 27
+
+console.log(rotatedDigits(87)); // 32
 
 console.log(rotatedDigits(50)); // 16
 
