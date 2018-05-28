@@ -5,7 +5,7 @@
 var countSegments = function(s) {
   if (s.length === 0) return 0;
   let matched = s.match(/\S+/gi);
-  console.log(matched);
+  // console.log(matched);
   if (matched) {
     return matched.length;
   }
