@@ -1,25 +1,5 @@
-function TreeNode(val) {
-  this.val = val;
-  this.left = this.right = null;
-}
-
-// index from 1
-const buildTreeFromArray = arr => index => {
-  let root = null;
-  if (index - 1 < arr.length && arr[index - 1] !== null) {
-    root = new TreeNode(arr[index - 1]);
-
-    if (index * 2 <= arr.length) {
-      root.left = buildTreeFromArray(arr)(index * 2);
-    }
-
-    if (index * 2 + 1 <= arr.length) {
-      root.right = buildTreeFromArray(arr)(index * 2 + 1);
-    }
-  }
-
-  return root;
-};
+const treeUtil = require('./tree.util');
+const { TreeNode, buildTree, printTree } = treeUtil;
 
 // handle null tree, 0
 var hasPathSum = function(root, sum) {
@@ -39,33 +19,18 @@ var hasPathSum = function(root, sum) {
   }
 };
 
-const tree1 = buildTreeFromArray([
-  5,
-  4,
-  8,
-  11,
-  null,
-  13,
-  4,
-  7,
-  2,
-  null,
-  null,
-  null,
-  1
-])(1);
+const tree1 = buildTree([5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1]);
+const tree2 = buildTree([1, 2]);
+const tree3 = buildTree([-2, null, -3]);
 
-const tree2 = buildTreeFromArray([1, 2])(1);
-const tree3 = buildTreeFromArray([-2, null, -3])(1);
-
-// true
 console.log(hasPathSum(tree1, 22));
-
-// false
-console.log(hasPathSum(null, 0));
-
-// false
-console.log(hasPathSum(tree2, 1));
-
 // true
+
 console.log(hasPathSum(tree3, -5));
+// true
+
+console.log(hasPathSum(null, 0));
+// false
+
+console.log(hasPathSum(tree2, 1));
+// false
