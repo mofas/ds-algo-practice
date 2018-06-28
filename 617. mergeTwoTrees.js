@@ -1,42 +1,5 @@
-function TreeNode(val) {
-  this.val = val;
-  this.left = this.right = null;
-}
-
-const buildTreeFromArray = arr => index => {
-  let root = null;
-  if (index - 1 < arr.length && arr[index - 1] !== null) {
-    root = new TreeNode(arr[index - 1]);
-
-    if (index * 2 <= arr.length) {
-      root.left = buildTreeFromArray(arr)(index * 2);
-    }
-
-    if (index * 2 + 1 <= arr.length) {
-      root.right = buildTreeFromArray(arr)(index * 2 + 1);
-    }
-  }
-
-  return root;
-};
-
-const buildTree = arr => buildTreeFromArray(arr)(1);
-const printTree = tree => {
-  let stack = [tree];
-  let ret = [];
-  while (stack.length) {
-    let t = stack.shift();
-    if (t) {
-      ret.push(t.val);
-      if (t.left || t.right) stack.push(t.left);
-      if (t.right) stack.push(t.right);
-    } else {
-      ret.push(null);
-    }
-  }
-
-  return ret;
-};
+const treeUtil = require('./tree.util.js');
+const { TreeNode, buildTree, printTree } = treeUtil;
 
 /**
  * @param {TreeNode} t1
@@ -78,3 +41,4 @@ const tree2 = buildTree([2, 1, 3, null, 4, null, 7]);
 // console.log(printTree(tree2));
 
 console.log(printTree(mergeTrees(tree1, tree2)));
+// [ 3, 4, 5, 5, 4, null, 7 ]
