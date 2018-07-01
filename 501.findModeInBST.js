@@ -1,5 +1,5 @@
 const treeUtil = require('./tree.util');
-const { TreeNode, buildBST, printTree } = treeUtil;
+const { TreeNode, buildTree, printTree } = treeUtil;
 
 /**
  * @param {TreeNode} root
@@ -61,17 +61,17 @@ var findMode = function(root) {
 //   return result;
 // };
 
-console.log(findMode(buildBST([1, null, 2, 2])));
+console.log(findMode(buildTree([1, null, 2, 2])));
 // [2]
 
-console.log(findMode(buildBST([1, 1, 2, 2])));
+console.log(findMode(buildTree([1, 1, 2, 2])));
 // [1, 2]
 
-console.log(findMode(buildBST([3, 2, 4, 1, 3, 3, 4])));
+console.log(findMode(buildTree([3, 2, 4, 1, 3, 3, 4])));
 // [3]
 
-console.log(findMode(buildBST([3, 2, 4, 1, 3, 4, 4])));
+console.log(findMode(buildTree([3, 2, 4, 1, 3, 4, 4])));
 // [4]
 
-console.log(findMode(buildBST([3, 3, 4, 1, 3, 4, 4])));
+console.log(findMode(buildTree([3, 3, 4, 1, 3, 4, 4])));
 // [3, 4]

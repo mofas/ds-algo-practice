@@ -1,5 +1,5 @@
 const treeUtil = require('./tree.util');
-const { TreeNode, buildTree, printTree, buildBST } = treeUtil;
+const { TreeNode, buildTree, printTree } = treeUtil;
 
 /**
  * @param {TreeNode} root
@@ -89,7 +89,7 @@ console.log(
 
 console.log(
   longestUnivaluePath(
-    buildBST([
+    buildTree([
       1,
       null,
       1,
