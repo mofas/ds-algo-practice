@@ -27,6 +27,8 @@ var findMode = function(root) {
 };
 
 // best sol from web
+// it do the DFS, so basically it will visit number in order.
+
 // var findMode = function(root) {
 //   var prev = null;
 //   var count = 1;
