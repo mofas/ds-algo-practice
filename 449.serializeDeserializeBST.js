@@ -44,6 +44,7 @@ var serialize = function(root) {
  * @return {TreeNode}
  */
 var deserialize = function(arr) {
+  if (!arr) return null;
   const n = arr.length;
   if (n === 0) return null;
 
