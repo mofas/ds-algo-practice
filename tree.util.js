@@ -51,7 +51,7 @@ const printTree = tree => {
     }
   }
 
-  while (ret[ret.length - 1] == null) {
+  while (ret[ret.length - 1] == null && ret.length > 0) {
     ret.pop();
   }
   return ret;
