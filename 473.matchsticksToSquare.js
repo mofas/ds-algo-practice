@@ -36,76 +36,52 @@ var makesquare = function(nums) {
   return helper(0, nums);
 };
 
-// best sol from web
-// 68ms
+// my tranlation for the fatest sol on disucssion board
+// 64ms
 var makesquare = function(nums) {
-  if (nums.length < 4) return false;
-
-  nums.sort((a, b) => a - b);
-
-  let s = 0;
-  let max = 0;
-  for (let i = 0; i < nums.length; ++i) {
-    let num = nums[i];
-    max += num;
+  const n = nums.length;
+  let acc = 0;
+  for (let i = 0; i < n; i++) {
+    acc += nums[i];
   }
-  if (max == 0 || max % 4 != 0) {
+  if (acc % 4 !== 0 || n < 4) return false;
+  const size = acc / 4;
+  nums.sort((a, b) => b - a);
+
+  const dfs = (sidesLength, idx) => {
+    // console.log(sidesLength, idx);
+    if (idx === nums.length) {
+      return (
+        sidesLength[0] === sidesLength[1] &&
+        sidesLength[1] === sidesLength[2] &&
+        sidesLength[2] === sidesLength[3]
+      );
+    }
+    for (let i = 0; i < 4; i++) {
+      if (sidesLength[i] + nums[idx] > size) continue;
+      let j = i;
+      while (--j >= 0) {
+        if (sidesLength[i] === sidesLength[j]) break;
+      }
+      if (j !== -1) continue;
+      sidesLength[i] += nums[idx];
+      if (dfs(sidesLength, idx + 1)) return true;
+      sidesLength[i] -= nums[idx];
+    }
     return false;
-  }
-  s = max / 4;
-  for (let m = 0; m < 4; ++m) {
-    var index = [];
-    let n = 0;
-    for (let j = nums.length - 1; j >= 0; --j) {
-      let num = nums[j];
-      let next = n + num;
-      if (next < s) {
-        if (j == 0) {
-          if (index.length == 0) {
-            return false;
-          }
-          j = index[index.length - 1];
-          n -= nums[j];
-          index.splice(index.length - 1, 1);
-        } else {
-          n += num;
-          index.push(j);
-        }
-      } else if (next == s) {
-        n += num;
-        index.push(j);
-        break;
-      } else {
-        if (j == 0) {
-          if (index.length == 0) {
-            return false;
-          }
-          j = index[index.length - 1];
-          n -= nums[j];
-          index.splice(index.length - 1, 1);
-        }
-      }
-    }
-    if (n != s) {
-      return false;
-    } else {
-      for (let k = 0; k < index.length; ++k) {
-        let i = index[k];
-        nums.splice(i, 1);
-      }
-    }
-  }
-  return true;
+  };
+
+  return dfs(new Array(4).fill(0).map(_ => 0), 0);
 };
 
-console.log(makesquare([1, 1, 2, 2, 2]));
-// true
+// console.log(makesquare([1, 1, 2, 2, 2]));
+// // true
 
-console.log(makesquare([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]));
-// true
+// console.log(makesquare([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]));
+// // true
 
-console.log(makesquare([3, 3, 3, 3, 4]));
-// false
+// console.log(makesquare([3, 3, 3, 3, 4]));
+// // false
 
 console.log(makesquare([5, 5, 5, 5, 16, 4, 4, 4, 4, 4, 3, 3, 3, 3, 4]));
 // false
