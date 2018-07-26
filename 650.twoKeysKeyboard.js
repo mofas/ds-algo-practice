@@ -223,16 +223,16 @@ var minSteps = function(n) {
 
 // best sol from disucssion board
 // 52 ms
-var minSteps = function(n) {
-  let s = 0;
-  for (let d = 2; d <= n; d++) {
-    while (n % d === 0) {
-      s += d;
-      n /= d;
-    }
-  }
-  return s;
-};
+// var minSteps = function(n) {
+//   let s = 0;
+//   for (let d = 2; d <= n; d++) {
+//     while (n % d === 0) {
+//       s += d;
+//       n /= d;
+//     }
+//   }
+//   return s;
+// };
 
 console.log(minSteps(3));
 // 3
