@@ -4,6 +4,7 @@
  */
 
 // 188ms
+// recursive dp solution
 var findLongestChain = function(pairs) {
   const n = pairs.length;
   pairs.sort((a, b) => a[0] - b[0]);
@@ -32,6 +33,7 @@ var findLongestChain = function(pairs) {
 
 // best sol from web
 // 76 ms
+// actually it is greeding problem
 // var findLongestChain = function(pairs) {
 //   if (!pairs) return 0;
 //   if (pairs.length <= 1) return pairs.length;
