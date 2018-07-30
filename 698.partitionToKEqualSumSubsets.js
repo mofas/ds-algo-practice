@@ -61,13 +61,15 @@ var canPartitionKSubsets = function(nums, k) {
 // var canPartitionKSubsets = function(nums, k) {
 //   let sum = nums.reduce((total, cur) => (total += cur), 0);
 //   if (sum % k !== 0) return false;
-
-//   const res = [];
-//   const tmp = [];
-//   const used = new Array(nums.length).fill(false);
 //   const target = sum / k;
-//   let cur = 0;
-//   return canPartition(target, nums, cur, used, k, 0);
+//   return canPartition(
+//     target,
+//     nums,
+//     0,
+//     new Array(nums.length).fill(false),
+//     k,
+//     0
+//   );
 // };
 
 console.log(canPartitionKSubsets([4, 3, 2, 3, 5, 2, 1], 4));
