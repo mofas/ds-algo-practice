@@ -68,6 +68,7 @@ var isMatch = function(s, p) {
 
 // best sol from web
 // 64 ms
+// this is also the offical sol
 var isMatch = function(s, p) {
   const n = s.length;
   const m = p.length;
