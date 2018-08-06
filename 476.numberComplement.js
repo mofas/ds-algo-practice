@@ -3,18 +3,8 @@
  * @return {number}
  */
 
-function dec2bin(dec) {
-  return (dec >>> 0).toString(2);
-}
-
-function bin2dec(bin) {
-  let ret = 0;
-  for (let i = 0; i < bin.length; i++) {
-    ret *= 2;
-    if (bin[i] === '1') ret += 1;
-  }
-  return ret;
-}
+const binUtil = require('./bin.util');
+const { dec2bin, bin2dec } = binUtil;
 
 var findComplement = function(num) {
   const binStr = dec2bin(num);
