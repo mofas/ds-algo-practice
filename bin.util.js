@@ -3,12 +3,7 @@ function dec2bin(dec) {
 }
 
 function bin2dec(bin) {
-  let ret = 0;
-  for (let i = 0; i < bin.length; i++) {
-    ret *= 2;
-    if (bin[i] === '1') ret += 1;
-  }
-  return ret;
+  return parseInt(bin, 2);
 }
 
 module.exports = {
