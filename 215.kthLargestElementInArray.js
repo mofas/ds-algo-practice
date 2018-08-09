@@ -13,15 +13,21 @@ var findKthLargest = function(nums, k) {
 
 // divide & conq
 // my own version div & conq
+// 72ms
 const swap = (nums, i, j) => {
   const temp = nums[i];
   nums[i] = nums[j];
   nums[j] = temp;
 };
-// 96ms
+
 var findKthLargest = function(nums, k) {
   const n = nums.length;
   const helper = (from, to) => {
+    // shuffle
+    if (to - from > 2) {
+      const rand = Math.floor(Math.random() * (to - from)) + from;
+      swap(nums, rand, to);
+    }
     const pivot = nums[to];
     let idx = from;
     for (let i = from; i < to; i++) {
@@ -72,6 +78,9 @@ var findKthLargest = function(nums, k) {
 
 console.log(findKthLargest([-1, -1], 2));
 // -1
+
+console.log(findKthLargest([2, 1], 2));
+// 1
 
 console.log(findKthLargest([6, 5, 4, 1, 2, 3], 3));
 // 4
