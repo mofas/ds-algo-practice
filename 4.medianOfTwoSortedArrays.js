@@ -58,17 +58,19 @@ var findMedianSortedArrays = function(nums1, nums2) {
   }
   let lo = 0,
     hi = m * 2;
-  console.log(nums1, nums2, n, m);
+  // console.log(nums1, nums2, n, m);
 
   while (lo <= hi) {
-    console.log('===', lo, hi);
     let mid2 = Math.floor((lo + hi) / 2);
     let mid1 = n + m - mid2;
+
+    // console.log('===', lo, hi, 'mid', mid2, mid1);
 
     let l1 = mid1 === 0 ? -Infinity : nums1[Math.floor((mid1 - 1) / 2)];
     let l2 = mid2 === 0 ? -Infinity : nums2[Math.floor((mid2 - 1) / 2)];
     let r1 = mid1 === n * 2 ? Infinity : nums1[Math.floor(mid1 / 2)];
     let r2 = mid2 === m * 2 ? Infinity : nums2[Math.floor(mid2 / 2)];
+    // console.log('output', l1, r1, l2, r2);
     if (l1 > r2) lo = mid2 + 1;
     else if (l2 > r1) hi = mid2 - 1;
     else return (Math.max(l1, l2) + Math.min(r1, r2)) / 2;
@@ -136,3 +138,6 @@ console.log(findMedianSortedArrays([1, 2, 3], [3, 4, 5]));
 
 console.log(findMedianSortedArrays([1, 2, 3, 4, 5, 6, 7], [5]));
 // 4.5
+
+console.log(findMedianSortedArrays([1, 2, 3, 4, 5, 6, 7], []));
+// 4
