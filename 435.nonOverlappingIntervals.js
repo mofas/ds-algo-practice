@@ -34,6 +34,22 @@ var eraseOverlapIntervals = function(intervals) {
   return res;
 };
 
+// best sol from web
+// it just reverse version for greed scheduling.
+var eraseOverlapIntervals = function(intervals) {
+  if (intervals.length == 0) return 0;
+  intervals.sort((a, b) => a.end - b.end);
+  let distinct = 1,
+    end = intervals[0].end;
+  for (let i = 1; i < intervals.length; i++) {
+    if (intervals[i].start >= end) {
+      distinct++;
+      end = intervals[i].end;
+    }
+  }
+  return intervals.length - distinct;
+};
+
 console.log(
   eraseOverlapIntervals(
     [[1, 2], [2, 3]].map(([start, end]) => new Interval(start, end))
