@@ -27,10 +27,10 @@ var reverseList = function(head) {
 var reverseList = function(head) {
   let res = null;
   while (head) {
-    let rem = head.next; //2...5 // 3...5 // 4..5
-    head.next = res; // 1 //2 1 //3 ,2,1
-    res = head; // 1 // 2, 1
-    head = rem; // 2...5 //3...5
+    let rem = head.next;
+    head.next = res;
+    res = head;
+    head = rem;
   }
   return res;
 };
