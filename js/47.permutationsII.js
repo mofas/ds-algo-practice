@@ -19,7 +19,7 @@ var permuteUnique = function(nums) {
   const helper = (arr, pos) => {
     // console.log(arr, i);
     if (pos === len - 1) {
-      ret.push(arr.slice());
+      ret.push(arr);
       return;
     }
     for (let k = pos; k < len; k++) {
