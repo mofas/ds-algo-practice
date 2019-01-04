@@ -24,7 +24,7 @@ var permuteUnique = function(nums) {
     }
     for (let k = pos; k < len; k++) {
       if (pos !== k && arr[pos] === arr[k]) continue;
-      swap(arr, pos, k);
+      if (pos !== k) swap(arr, pos, k);
       helper(arr.slice(), pos + 1);
     }
   };
