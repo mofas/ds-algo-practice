@@ -4,12 +4,8 @@
  * @return {number}
  */
 
-// 84ms, beat 16.67%
+// 64ms, beat 60%
 var longestSubstring = function(s, k) {
-  const len = s.length;
-  let from = 0;
-  let to = len - 1;
-
   const calculateHash = s => {
     const initHash = {};
     for (const key of s) {
@@ -18,50 +14,25 @@ var longestSubstring = function(s, k) {
     }
     return initHash;
   };
-
-  const isValidSubstring = hash => {
-    for (const key in hash) {
-      if (hash[key] > 0 && hash[key] < k) return false;
-    }
-    return true;
-  };
-
   const helper = s => {
     const hash = calculateHash(s);
-    if (isValidSubstring(hash)) return s.length;
-
-    // find which key is not good!
-    let bads = [];
-    let keeps = [];
-    for (const key in hash) {
-      if (hash[key] < k) bads.push(key);
-      else {
-        keeps.push(key);
-      }
-    }
-    if (keeps.length === 0) return 0;
-    let cands = [s];
-    let next = [];
-
-    // console.log('bad', s, bads);
-
-    for (const c of bads) {
-      for (const cand of cands) {
-        let newCands = cand.split(c).filter(d => d.length >= k);
-        next = next.concat(newCands);
-      }
-      cands = next;
-      next = [];
-    }
-
     let max = 0;
-    for (const cand of cands) {
-      max = Math.max(max, helper(cand));
+    for (const key in hash) {
+      if (hash[key] < k) {
+        let newCands = s.split(key).filter(d => d.length >= k);
+        for (const cand of newCands) {
+          max = Math.max(max, helper(cand));
+        }
+        return max;
+      }
     }
-    return max;
+    return s.length;
   };
   return helper(s);
 };
+
+// best sol
+//
 
 console.log(longestSubstring('aaabb', 3));
 // 3
