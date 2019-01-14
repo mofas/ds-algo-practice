@@ -3,13 +3,13 @@ class MinHeap {
     this._items = [];
   }
 
-  extractMin() {
+  pop() {
     let ret = this._items.shift();
     this.heapify();
     return ret;
   }
 
-  peekTop() {
+  top() {
     return this._items[0];
   }
 
@@ -50,10 +50,9 @@ class MinHeap {
     }
   }
 
-  insert(item) {
+  push(item) {
     this._items.unshift(item);
     this.heapify();
-    console.log(this._items);
   }
 
   swap(i, j) {
@@ -65,6 +64,14 @@ class MinHeap {
   isEmpty() {
     return this._items.length === 0;
   }
+
+  size() {
+    return this._items.length;
+  }
+
+  _getItems() {
+    return this._items;
+  }
 }
 
 module.exports = {
@@ -73,14 +80,14 @@ module.exports = {
 
 // const heap = new MinHeap();
 
-// heap.insert(5);
-// heap.insert(4);
-// heap.insert(1);
-// heap.insert(3);
-// heap.insert(6);
-// heap.insert(2);
+// heap.push(5);
+// heap.push(4);
+// heap.push(1);
+// heap.push(3);
+// heap.push(6);
+// heap.push(2);
 
 // while (!heap.isEmpty()) {
-//   const min = heap.extractMin();
-//   console.log('extract min', min);
+//   const min = heap.pop();
+//   console.log('extract min', min, 'next:', heap.top());
 // }
