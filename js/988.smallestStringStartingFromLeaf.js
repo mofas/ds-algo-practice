@@ -5,6 +5,7 @@ const { TreeNode, buildTree, printTree } = treeUtil;
  * @param {TreeNode} root
  * @return {string}
  */
+// 84ms
 var smallestFromLeaf = function(root) {
   const helper = node => {
     if (!node) return [];
@@ -48,6 +49,22 @@ var smallestFromLeaf = function(root) {
   return seq.map(d => String.fromCharCode(d + 97)).join('');
 };
 
+// best sol
+// 76ms
+const chars = 'abcdefghijklmnopqrstuvwxyz';
+var smallestFromLeaf = function(root) {
+  const left = root.left;
+  const right = root.right;
+  let temp = '';
+  if (left && right) {
+    const leftAns = smallestFromLeaf(left);
+    const rightAns = smallestFromLeaf(right);
+    temp = leftAns < rightAns ? leftAns : rightAns;
+  } else if (left || right) {
+    temp = left ? smallestFromLeaf(root.left) : smallestFromLeaf(right);
+  }
+  return temp + chars[root.val];
+};
 console.log(smallestFromLeaf(buildTree([0, 1, 2, 3, 4, 3, 4])));
 // 'dba'
 
