@@ -4,6 +4,7 @@
  */
 
 // DP
+//60ms (71.43%), 34.7MB(100%)
 var numTilings = function(N) {
   const dp = new Array(N + 1).fill(0);
   const mod = 1e9 + 7;
