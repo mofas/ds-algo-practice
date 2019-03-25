@@ -32,31 +32,48 @@ var lengthOfLongestSubstring = function(s) {
   // console.log(ret);
   return ret.length;
 };
+/**
+ * @param {string} s
+ * @return {number}
+ */
 
-// best sol from web
+// 96 ms, faster than 88.64%
+// 37.9 MB, less than 85.36%
+var lengthOfLongestSubstring = function(s) {
+  const n = s.length;
+  if (n < 2) return n;
+
+  const hash = new Set();
+  let from = 0;
+  let max = 0;
+
+  for (let i = 0; i < n; i++) {
+    const ch = s[i];
+    if (hash.has(ch)) {
+      max = Math.max(max, i - from);
+      while (hash.has(ch)) {
+        hash.delete(s[from]);
+        from++;
+      }
+    }
+    hash.add(ch);
+  }
+  max = Math.max(max, n - from);
+
+  return max;
+};
+
+// 72 ms
 // var lengthOfLongestSubstring = function(s) {
-//   if (s === null) {
-//     return 0;
+//   let res = 0, start = 0;
+//   for (let i = 0; i < s.length; i++) {
+//       const index = s.indexOf(s[i], start);
+//       if (index > -1 && index < i) {
+//           start = index + 1;
+//       }
+//       res = Math.max(res, index - start + 1);
 //   }
-//   if (s.length <= 1) {
-//     return s.length;
-//   }
-
-//   let longest = 1;
-//   let i = 0;
-//   let j = 1;
-
-//   while (j < s.length) {
-//     if (s.slice(i, j).indexOf(s.charAt(j)) >= 0) {
-//       i += s.slice(i, j).indexOf(s.charAt(j)) + 1;
-//     } else {
-//       longest = Math.max(j - i + 1, longest);
-//     }
-
-//     j++;
-//   }
-
-//   return longest;
+//   return res;
 // };
 
 console.log(lengthOfLongestSubstring('abcabcbb'));
