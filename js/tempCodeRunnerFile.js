@@ -1,6 +1,9 @@
-} else if (ln > rn) {
-      //   rb.push(node.val);
-      //   return rb;
-      // } else if (ln < rn) {
-      //   lb.push(node.val);
-      //   return lb;
+while (a === b && i < tree.length) {
+  //   b = tree[i];
+  //   i += 1;
+  //   count += 1;
+  // }
+
+  // if (i === tree.length) {
+  //   return count;
+  // }
