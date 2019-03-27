@@ -3,82 +3,6 @@
  * @return {number[][]}
  */
 
-// brute force
-// var threeSum = function(nums) {
-//   const n = nums.length;
-//   nums.sort((a, b) => a - b);
-//   if (n === 0) return [];
-
-//   let ret = [];
-//   let start = 0;
-//   let prev = null;
-
-//   let prevEnd = n - 1;
-//   let sum = 0;
-//   while (start < n) {
-//     // console.log('start', start, prevEnd);
-//     for (let end = prevEnd; end > start; end--) {
-//       sum = nums[start] + nums[end];
-
-//       if (sum >= 0) {
-//         inner: for (let k = start + 1; k < end && nums[k] <= 0; k++) {
-//           // console.log(
-//           //   'a',
-//           //   nums[start],
-//           //   nums[k],
-//           //   nums[end],
-//           //   '--',
-//           //   start,
-//           //   k,
-//           //   end
-//           // );
-
-//           if (sum + nums[k] === 0) {
-//             ret.push([nums[start], nums[k], nums[end]]);
-//             while (end > start && nums[end] === nums[end - 1]) {
-//               end--;
-//             }
-//             break inner;
-//           }
-//         }
-//       } else if (sum < 0) {
-//         inner: for (let k = end - 1; k > start && nums[k] >= 0; k--) {
-//           // console.log(
-//           //   'b',
-//           //   nums[start],
-//           //   nums[k],
-//           //   nums[end],
-//           //   '--',
-//           //   start,
-//           //   k,
-//           //   end
-//           // );
-//           if (sum + nums[k] === 0) {
-//             ret.push([nums[start], nums[k], nums[end]]);
-//             while (end > start && nums[end] === nums[end - 1]) {
-//               end--;
-//             }
-//             break inner;
-//           }
-//         }
-//       }
-//     }
-//     // if (nums[start] + nums[prevEnd] !== 0) {
-//     //   prev = nums[prevEnd];
-//     //   while (prevEnd > start && prev === nums[prevEnd]) {
-//     //     prevEnd--;
-//     //   }
-//     // }
-
-//     prev = nums[start];
-//     while (start < n && prev === nums[start]) {
-//       start++;
-//     }
-//   }
-
-//   return ret;
-// };
-
 // reasonable sol from web
 var threeSum = function(nums) {
   const n = nums.length;
@@ -111,6 +35,33 @@ var threeSum = function(nums) {
     while (i + 1 < n && nums[i + 1] === nums[i]) i++;
   }
 
+  return ret;
+};
+
+// 168 ms, faster than 92.83%
+// 46.9 MB, less than 53.64%
+var threeSum = function(nums) {
+  nums.sort((a, b) => a - b);
+  const n = nums.length;
+  const ret = [];
+  for (let i = 0; i < n - 1; i++) {
+    let j = i + 1;
+    let k = n - 1;
+    while (j < k) {
+      if (nums[j] + nums[k] > -nums[i]) {
+        k--;
+      } else if (nums[j] + nums[k] < -nums[i]) {
+        j++;
+      } else {
+        ret.push([nums[i], nums[j], nums[k]]);
+        while (j < k && nums[j] === nums[j + 1]) j++;
+        while (j < k && nums[k] === nums[k - 1]) k--;
+        j++;
+        k--;
+      }
+    }
+    while (i + 1 < n && nums[i] === nums[i + 1]) i++;
+  }
   return ret;
 };
 
