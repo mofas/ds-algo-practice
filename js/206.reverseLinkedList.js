@@ -35,6 +35,19 @@ var reverseList = function(head) {
   return res;
 };
 
+// 2nd recursive
+// Runtime: 64 ms, faster than 76.26%
+// Memory Usage: 35.3 MB, less than 25.91%
+var reverseList = function(head) {
+  const helper = (current, tail) => {
+    if (!current) return tail;
+    const res = helper(current.next, current);
+    current.next = tail;
+    return res;
+  };
+  return helper(head, null);
+};
+
 const l1 = buildLinkedList([1]);
 console.log(printLinkedList(reverseList(l1)));
 // 1

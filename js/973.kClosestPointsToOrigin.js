@@ -38,6 +38,45 @@ var kClosest = function(points, K) {
   return points.slice(0, K);
 };
 
+// my version
+/**
+ * @param {number[][]} points
+ * @param {number} K
+ * @return {number[][]}
+ */
+// Runtime: 172 ms, faster than 99.23%
+// Memory Usage: 48 MB, less than 77.11%
+var kClosest = function(points, K) {
+  const dist = d => d[0] * d[0] + d[1] * d[1];
+  const n = points.length;
+  const helper = (from, to) => {
+    if (to === from) return;
+    let i = from;
+    const pivot = dist(points[to - 1]);
+    for (let k = from; k < to - 1; k++) {
+      if (dist(points[k]) <= pivot) {
+        const temp = points[i];
+        points[i] = points[k];
+        points[k] = temp;
+        i++;
+      }
+    }
+    const temp = points[i];
+    points[i] = points[to - 1];
+    points[to - 1] = temp;
+
+    // recursive
+    if (i < K) {
+      helper(i + 1, to);
+    } else {
+      helper(from, i);
+    }
+  };
+
+  helper(0, n, K);
+  return points.slice(0, K);
+};
+
 console.log(kClosest([[1, 3], [-2, 2]], 1));
 // [[-2, 2]]
 
