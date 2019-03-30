@@ -63,6 +63,33 @@ var search = function(nums, target) {
 //   return -1;
 // };
 
+// second try
+var search = function(nums, target) {
+  const n = nums.length;
+  let from = 0;
+  let to = n - 1;
+
+  while (from <= to) {
+    const mid = Math.floor((from + to) / 2);
+    if (nums[mid] === target) return mid;
+    // rotate idx in the rear
+    if (nums[mid] > nums[to]) {
+      if (target < nums[mid] && target >= nums[from]) {
+        to = mid - 1;
+      } else {
+        from = mid + 1;
+      }
+    } else {
+      if (target > nums[mid] && target <= nums[to]) {
+        from = mid + 1;
+      } else {
+        to = mid - 1;
+      }
+    }
+  }
+  return -1;
+};
+
 console.log(search([4, 7, 8, 9, 2, 3], 4)); // 0
 
 console.log(search([5, 1, 3], 5)); //0
