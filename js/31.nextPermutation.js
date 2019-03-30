@@ -74,6 +74,41 @@ var nextPermutation = function(nums) {
 //   return;
 // };
 
+// second try: offical solution
+var nextPermutation = function(nums) {
+  const n = nums.length;
+
+  const swap = (i, j) => {
+    const tmp = nums[i];
+    nums[i] = nums[j];
+    nums[j] = tmp;
+  };
+
+  const reverse = i => {
+    let from = i;
+    let end = n - 1;
+    while (from < end) {
+      swap(from, end);
+      from += 1;
+      end -= 1;
+    }
+  };
+
+  let i = n - 2;
+  while ((i >= 0) & (nums[i + 1] <= nums[i])) {
+    i--;
+  }
+  if (i >= 0) {
+    let j = n - 1;
+    while (j > i && nums[j] <= nums[i]) {
+      j--;
+    }
+    swap(i, j);
+  }
+
+  reverse(i + 1);
+};
+
 nextPermutation([1, 2, 3]); //[1,3,2]
 
 nextPermutation([1, 3, 2]); //[2,1,3]
