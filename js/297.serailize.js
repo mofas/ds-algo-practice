@@ -28,6 +28,57 @@ var serialize = function(root) {
  * @return {TreeNode}
  */
 
+var deserialize = function(data) {
+  if (data !== null) {
+    let root = new TreeNode(data.val);
+    root.left = deserialize(data.left);
+    root.right = deserialize(data.right);
+    return root;
+  }
+  return null;
+};
+
+// second try
+/**
+ * Encodes a tree to a single string.
+ *
+ * @param {TreeNode} root
+ * @return {string}
+ */
+var serialize = function(root) {
+  let ret = [];
+
+  const helper = node => {
+    if (node) {
+      ret.push(node.val);
+      helper(node.left);
+      helper(node.right);
+    } else {
+      ret.push(null);
+    }
+  };
+  helper(root);
+  return ret;
+};
+
+/**
+ * Decodes your encoded data to tree.
+ *
+ * @param {string} data
+ * @return {TreeNode}
+ */
+var deserialize = function(data) {
+  if (data[0] === null) {
+    data.shift();
+    return null;
+  }
+  const root = new TreeNode(data[0]);
+  data.shift();
+  root.left = deserialize(data);
+  root.right = deserialize(data);
+  return root;
+};
+
 const buildTreeFromArray = arr => index => {
   let root = null;
   if (index - 1 < arr.length && arr[index - 1] !== null) {
@@ -45,16 +96,6 @@ const buildTreeFromArray = arr => index => {
   return root;
 };
 const buildTree = arr => buildTreeFromArray(arr)(1);
-
-var deserialize = function(data) {
-  if (data !== null) {
-    let root = new TreeNode(data.val);
-    root.left = deserialize(data.left);
-    root.right = deserialize(data.right);
-    return root;
-  }
-  return null;
-};
 
 const tree1 = buildTree([1, 2, 3, 4, 5, 6, 7]);
 
