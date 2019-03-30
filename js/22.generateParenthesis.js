@@ -51,6 +51,26 @@ var generateParenthesis = function(n) {
 //   return result;
 // };
 
+// second
+var generateParenthesis = function(n) {
+  let queue = [{ s: '', left: n, right: n }];
+  let ret = [];
+  while (queue.length) {
+    const c = queue.pop();
+    if (c.left > 0 || c.right > 0) {
+      if (c.left > 0) {
+        queue.push({ s: c.s + '(', left: c.left - 1, right: c.right });
+      }
+      if (c.left < c.right) {
+        queue.push({ s: c.s + ')', left: c.left, right: c.right - 1 });
+      }
+    } else {
+      ret.push(c.s);
+    }
+  }
+  return ret;
+};
+
 // console.log(generateParenthesis(1));
 
 // console.log(generateParenthesis(2));
