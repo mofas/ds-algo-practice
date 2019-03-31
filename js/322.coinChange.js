@@ -75,6 +75,25 @@ function coinChange(coins, amount) {
   return res === Infinity ? -1 : res;
 }
 
+// second try
+// var coinChange = function(coins, amount) {
+//   const max = amount + 1;
+//   coins.sort((a, b) => a - b);
+//   const cache = new Array(amount + 1).fill(max);
+//   cache[0] = 0;
+//   for (let i = 1; i <= amount; i++) {
+//     let currentMin = max;
+//     for (const coin of coins) {
+//       if (coin > i) break;
+//       if (cache[i - coin] >= 0)
+//         currentMin = Math.min(currentMin, cache[i - coin] + 1);
+//     }
+//     cache[i] = currentMin;
+//   }
+//   // console.log(coins, cache);
+//   return cache[amount] === max ? -1 : cache[amount];
+// };
+
 console.log(coinChange([2], 3));
 // -1
 

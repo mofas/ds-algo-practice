@@ -26,6 +26,16 @@ var numJewelsInStones = function(J, S) {
 //   }, 0);
 // };
 
+// second
+var numJewelsInStones = function(J, S) {
+  const jSet = new Set(J);
+  let ret = 0;
+  for (const ch of S) {
+    if (jSet.has(ch)) ret += 1;
+  }
+  return ret;
+};
+
 console.log(numJewelsInStones('aA', 'aAAbbbb'));
 // 3
 
