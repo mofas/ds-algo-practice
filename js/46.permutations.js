@@ -1,27 +1,54 @@
-/**
- * @param {number[]} nums
- * @return {number[][]}
- */
+// /**
+//  * @param {number[]} nums
+//  * @return {number[][]}
+//  */
 
-// 68ms
+// // 68ms
+// var permute = function(nums) {
+//   const len = nums.length;
+//   let ret = [new Array(len).fill(null)];
+//   let next = [];
+
+//   for (let i = 0; i < len; i++) {
+//     for (const item of ret) {
+//       for (let j = 0; j < len; j++) {
+//         if (item[j] == null) {
+//           let newCopy = item.slice();
+//           newCopy[j] = nums[i];
+//           next.push(newCopy);
+//         }
+//       }
+//     }
+//     ret = next;
+//     next = [];
+//   }
+//   return ret;
+// };
+
 var permute = function(nums) {
-  const len = nums.length;
-  let ret = [new Array(len).fill(null)];
-  let next = [];
+  const n = nums.length;
+  let ret = [];
 
-  for (let i = 0; i < len; i++) {
-    for (const item of ret) {
-      for (let j = 0; j < len; j++) {
-        if (item[j] == null) {
-          let newCopy = item.slice();
-          newCopy[j] = nums[i];
-          next.push(newCopy);
-        }
+  // DPS with back tracking
+  const set = new Set(nums);
+  const helper = (current, set) => {
+    if (set.size === 0) {
+      ret.push(current.slice());
+    } else {
+      // avoid loop
+      let iterSet = new Set(set);
+      for (const num of iterSet) {
+        current.push(num);
+        set.delete(num);
+        helper(current, set);
+        current.pop();
+        set.add(num);
       }
     }
-    ret = next;
-    next = [];
-  }
+  };
+
+  helper([], set);
+
   return ret;
 };
 
