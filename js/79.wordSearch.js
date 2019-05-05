@@ -99,6 +99,41 @@ var exist = function(board, word) {
 //   }
 // };
 
+// second try
+// 92ms
+// var exist = function(board, word) {
+//   if (board.length === 0) return false;
+//   const n = board.length;
+//   const m = board[0].length;
+
+//   const explore = (i, j, k) => {
+//     if (k === word.length) return true;
+//     if (i >= n || i < 0 || j >= m || j < 0) return false;
+//     if (board[i][j] !== word[k]) return false;
+//     const tmp = board[i][j];
+//     board[i][j] = '*';
+
+//     if (
+//       explore(i + 1, j, k + 1) ||
+//       explore(i - 1, j, k + 1) ||
+//       explore(i, j + 1, k + 1) ||
+//       explore(i, j - 1, k + 1)
+//     )
+//       return true;
+
+//     board[i][j] = tmp;
+//     return false;
+//   };
+
+//   for (let i = 0; i < n; i++) {
+//     for (let j = 0; j < m; j++) {
+//       if (explore(i, j, 0)) return true;
+//     }
+//   }
+
+//   return false;
+// };
+
 const board = [
   ['A', 'B', 'C', 'E'],
   ['S', 'F', 'C', 'S'],
